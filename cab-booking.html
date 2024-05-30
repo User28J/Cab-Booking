@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booking Confirmation Details</h1>
+
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" placeholder="Enter destination">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" placeholder="Enter your phone number">
+
+    <label for="distance">Enter Distance (in km):</label>
+    <input type="number" id="distance" placeholder="Enter distance">
+
+    <button onclick="calculateFare()">Calculate Fare</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateFare() {
+            const destination = document.getElementById('destination').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const distance = document.getElementById('distance').value;
+
+            if (destination === '' || name === '' || phone === '' || distance === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const fare = distance * 16 * 2;
+            const result = `Booking Confirmation Details:
+Destination: ${destination}
+Name: ${name}
+Phone Number: ${phone}
+Distance: ${distance} km
+Fare: Rs. ${fare}`;
+
+            document.getElementById('result').textContent = result;
+
+            const emailBody = `Booking Confirmation Details:%0D%0A%0D%0A${result}`;
+            const mailtoLink = `mailto:bjhansi028@gmail.com?subject=Cab%20Booking%20Confirmation&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
